@@ -7,14 +7,19 @@ module.exports = {
   plugins: [
     `gatsby-plugin-react-helmet`,
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: `gatsby-source-prismic-graphql`,
       options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
+        repositoryName: `bambis-revenge`,
+        path: '/preview',
+        previews: true,
+        pages: [{
+          type: 'Post',
+          match: '/blog/:uid',
+          path: '/blog',
+          component: require.resolve('./src/templates/post.js')
+        }]
+      }
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
