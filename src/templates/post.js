@@ -24,10 +24,12 @@ query PostQuery($uid: String) {
 `
 
 const Post = props => {
-  const doc = props.data.prismic.allPosts.edges[0].node;
+  const doc = props.data.prismic.allPosts.edges.slice(0,1).pop();
+  if(!doc) return null;
+  console.log(doc);
   return (
     <div>
-      {RichText.render(doc.title)}
+      {RichText.render(doc.node.title)}
     </div>
   )
 }
